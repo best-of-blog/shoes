@@ -1,37 +1,87 @@
-## Welcome to GitHub Pages
+---
+layout: default
+title: Home
+---
 
-You can use the [editor on GitHub](https://github.com/best-of-blog/shoes/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+<!-- Home Jumbotron
+================================================== -->    
+<section class="intro full-width">
+    <div class="wrapintro">
+        <h1>Best Of: Reviews</h1>
+        <h2 class="lead">We test things so you don't have to.</h2>    
+    </div>
+</section>
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+<!-- Featured
+================================================== -->
+<section class="featured-posts">
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+    <div class="section-title">
+        <h2><span>Featured</span></h2>
+    </div>
 
-```markdown
-Syntax highlighted code block
+    <div class="row listfeaturedtag">
 
-# Header 1
-## Header 2
-### Header 3
+    {% for post in site.posts %}
 
-- Bullete
-- List
+        {% if post.featured == true %}
 
-1. Numbered
-2. List
+            {% include featuredbox.html %}
 
-**Bold** and _Italic_ and `Code` text
+        {% endif %}
 
-[Link](url) and ![Image](src)
-```
+    {% endfor %}
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+    </div>
 
-### Jekyll Themes
+</section>
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/best-of-blog/shoes/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+<!-- Posts Index
+================================================== -->
+{% if paginator.previous_page %}
+{% if paginator.previous_page > 0 %}
+<div id="jumptopageof"></div>
+{% endif %}
+{% endif %}    
 
-### Support or Contact
+<section class="recent-posts row">
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+    <div class="col-sm-4">
+        {% include sidebar.html %}
+    </div>
+
+    <div class="col-sm-8">
+
+        <div class="section-title">
+            <h2><span>All Stories</span></h2>    
+        </div>
+
+        <div class="masonrygrid row listrecent">
+
+            {% for post in paginator.posts %}
+
+            {% unless post.featured == true %}
+
+                {% include postbox.html %}
+
+            {% endunless %}
+
+            {% endfor %}
+
+        </div> 
+
+        <!-- Pagination -->
+        <div class="bottompagination">
+
+            <span class="navigation" role="navigation">
+
+                {% include pagination.html %}
+
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
